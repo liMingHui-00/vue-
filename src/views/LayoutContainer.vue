@@ -9,7 +9,8 @@
             {{ news.title }}
           </div>
           <div class="news-image">
-            <!-- <img :src="news.image" alt=""> -->
+            <!-- 图片，我需要在后端 -->
+            <!-- <img src="http://localhost:4000/public/logo.png" alt=""> -->
           </div>
 
         </div>
