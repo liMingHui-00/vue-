@@ -1,0 +1,11 @@
+.red-strong {
+  color: #ff0000; /* 最深的红色 */
+}
+
+.red-medium {
+  color: #ff4d4d; /* 中等深度的红色 */
+}
+
+.red-light {
+  color: #ff9999; /* 最浅的红色 */
+}
