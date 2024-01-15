@@ -1,7 +1,9 @@
 <template>
   <!-- 内容区 -->
   <div>
-    <div class="container">
+    <router-view></router-view>
+    <div class="container" v-if="showContainer">
+
       <div class="left">
         <!-- 左边的一个一个的新闻 -->
         <div v-for="news in Layout_news" :key="news.id" class="news-item">
@@ -33,20 +35,31 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { useRoute } from "vue-router"
+const route = useRoute()
 import { userLayoutNewsService } from '@/api/news'
 import ranklist from '@/views/components/rankList.vue'
 // 存储首页加载的新闻
 const Layout_news = ref([])
-
+let showContainer = ref(true)
+watch(() => route.path, () => {
+  console.log(111111)
+  showContainer.value = !showContainer.value
+})
 // 滑动加载
+let isLoading = ref(false)
 const loadMoreNews = async () => {
+  if (isLoading.value) return
+  isLoading.value = true
   const res = await userLayoutNewsService()
   console.log(res)
   Layout_news.value.push(...res.data)
+  isLoading.value = false
 }
 
 const checkScroll = () => {
+  if (!showContainer.value) return
   const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
   const scrolled = window.scrollY
   if (scrolled >= scrollableHeight - 10) { // 10是距离底部的偏移量，可以根据需要调整
@@ -54,9 +67,14 @@ const checkScroll = () => {
   }
 }
 
-onMounted(async () => {
-  await loadMoreNews()
+const handleScroll = () => {
   window.addEventListener('scroll', checkScroll)
+}
+onMounted(async () => {
+  if (showContainer.value) {
+    loadMoreNews()
+    handleScroll()
+  }
 })
 
 onUnmounted(() => {

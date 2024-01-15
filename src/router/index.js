@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"
 import { useUserStore } from "@/store/user"
+import NewsOneRoutes from "@/router/news"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL), //无#
@@ -12,7 +13,7 @@ const router = createRouter({
     {
       path: "/",
       component: () => import("@/views/LayoutContainer.vue"),
-      children: [],
+      children: [...NewsOneRoutes],
     },
 
     {
