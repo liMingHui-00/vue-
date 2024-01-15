@@ -13,6 +13,7 @@
 
         <!-- 内容 -->
         <div class="rank-content">
+          <!--todo 点击跳转 -->
           <span class="title">
             {{ item.title }}
           </span>
