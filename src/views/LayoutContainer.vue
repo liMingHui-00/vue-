@@ -13,10 +13,11 @@
               <div class="news-text-title">
                 {{ news.title }}
               </div>
-              <!-- 新闻的来源及时间 -->
+              <!-- 新闻的来源及时间评论 -->
               <div class="news-text-other">
                 <span>{{ news.type }}</span>
                 <span>{{ news.time }}</span>
+                <span>{{ news.comment }}评论</span>
               </div>
             </div>
             <div class="news-image">
