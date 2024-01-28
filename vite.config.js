@@ -10,10 +10,12 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      imports: ["vue", "vue-router"],
+      dirs: ["./src/**/*"],
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      //  可以通过配置来达到自动导入你想要导入的组件
+      dirs: ["./src/components", "./src/views"],
     }),
   ],
   resolve: {

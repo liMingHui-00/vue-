@@ -5,9 +5,6 @@
   </div>
 </template>
 
-<script setup>
-import comments from '@/views/components/comments.vue';
-
-</script>
+<script setup></script>
 
 <style lang="scss" scoped></style>

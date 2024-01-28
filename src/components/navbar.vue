@@ -5,7 +5,7 @@
       <div class="box">
         <h1>
           <router-link to="/">
-            <img src="../assets/logo.png">
+            <img src="../assets/logo.png" />
           </router-link>
         </h1>
         <nav>
@@ -15,8 +15,19 @@
         </nav>
       </div>
       <div class="box">
-        <input class="text" type="text" placeholder="请输入关键词~~~" v-model="searchMsg" name="search">
-        <input class="button" type="button" value="搜索" @click="console.log(searchMsg)">
+        <input
+          class="text"
+          type="text"
+          placeholder="请输入关键词~~~"
+          v-model="searchMsg"
+          name="search"
+        />
+        <input
+          class="button"
+          type="button"
+          value="搜索"
+          @click="console.log(searchMsg)"
+        />
         <nav>
           <el-button>登录</el-button>
         </nav>
@@ -24,16 +35,10 @@
     </div>
   </div>
 </template>
-  
-
-
 
 <script setup>
-
-import { ref } from 'vue'
 // 搜索框的内容
-const searchMsg = ref('')
-
+const searchMsg = ref("")
 </script>
 
 <style scoped>
@@ -49,7 +54,6 @@ const searchMsg = ref('')
   /* position: sticky;
         position: -webkit-sticky;    !*兼容 -webkit 内核的浏览器*!
         top: 0px;                    !*必须设一个值，否则不生效*!*/
-
 }
 
 .box {
@@ -110,7 +114,8 @@ nav a:hover {
 .text:focus {
   outline: none;
   border-color: rgba(82, 168, 236, 0.8);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.075),
+    0 0 8px rgba(82, 168, 236, 0.6);
 }
 
 .button {
