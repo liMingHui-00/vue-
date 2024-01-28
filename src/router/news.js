@@ -1,9 +1,10 @@
 const NewsOneRoutes = [
   {
-    path: "/231230114352633224534",
+    path: "/news/:id", // 动态段以冒号开始
+    name: "NewsDetail",
     component: () => import("@/views/news/NewsOne.vue"),
+    props: true, // 允许route.params直接设置为组件的props
   },
-  // 其他与首页相关的路由...
 ]
 
 export default NewsOneRoutes

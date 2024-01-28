@@ -3,11 +3,10 @@
   <div>
     <router-view></router-view>
     <div class="container" v-if="showContainer">
-
       <div class="left">
         <!-- 左边的一个一个的新闻 -->
         <div v-for="news in Layout_news" :key="news.id" class="news-item">
-          <router-link :to="news.url">
+          <router-link :to="'news/' + news.url">
             <div class="news-text">
               <!-- 新闻的标题 -->
               <div class="news-text-title">
@@ -22,7 +21,7 @@
             </div>
             <div class="news-image">
               <!-- 图片，我需要在后端 -->
-              <img :src="news.image" alt="">
+              <img :src="news.image" alt="" />
             </div>
           </router-link>
         </div>
@@ -36,40 +35,43 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from "vue-router"
 const route = useRoute()
-import { userLayoutNewsService } from '@/api/news'
-import ranklist from '@/views/components/rankList.vue'
+// import { userLayoutNewsService } from "@/api/news"
+import ranklist from "@/views/components/rankList.vue"
 // 存储首页加载的新闻
 const Layout_news = ref([])
 let showContainer = ref(true)
-watch(() => route.path, () => {
-  console.log(111111)
-  showContainer.value = !showContainer.value
-})
+watch(
+  () => route.path,
+  () => {
+    showContainer.value = !showContainer.value
+  }
+)
 // 滑动加载
 let isLoading = ref(false)
 const loadMoreNews = async () => {
   if (isLoading.value) return
   isLoading.value = true
   const res = await userLayoutNewsService()
-  console.log(res)
+  // console.log(res)
   Layout_news.value.push(...res.data)
   isLoading.value = false
 }
 
 const checkScroll = () => {
   if (!showContainer.value) return
-  const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
+  const scrollableHeight =
+    document.documentElement.scrollHeight - window.innerHeight
   const scrolled = window.scrollY
-  if (scrolled >= scrollableHeight - 10) { // 10是距离底部的偏移量，可以根据需要调整
+  if (scrolled >= scrollableHeight - 10) {
+    // 10是距离底部的偏移量，可以根据需要调整
     loadMoreNews()
   }
 }
 
 const handleScroll = () => {
-  window.addEventListener('scroll', checkScroll)
+  window.addEventListener("scroll", checkScroll)
 }
 onMounted(async () => {
   if (showContainer.value) {
@@ -79,11 +81,11 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', checkScroll)
+  window.removeEventListener("scroll", checkScroll)
 })
 </script>
 
-<style  scoped>
+<style scoped>
 .container {
   display: flex;
   /* 使用Flexbox布局 */
@@ -132,7 +134,6 @@ onUnmounted(() => {
   text-decoration: none;
   color: inherit;
 }
-
 
 .news-text {
   width: 100%;

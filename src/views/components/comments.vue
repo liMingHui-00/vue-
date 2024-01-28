@@ -28,7 +28,9 @@
 </template>
 
 <script setup>
-let comments = ref(["1", 2, 3, 4, 5, 6, 7])
+let comments = defineProps(["msg"])
+console.log(comments)
+// let comments = ref(["1", 2, 3, 4, 5, 6, 7])
 </script>
 
 <style scoped>
