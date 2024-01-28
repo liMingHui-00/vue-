@@ -6,7 +6,7 @@
       <div class="left">
         <!-- 左边的一个一个的新闻 -->
         <div v-for="news in Layout_news" :key="news.id" class="news-item">
-          <router-link :to="'news/' + news.url">
+          <router-link :to="'/news/' + news.url">
             <div class="news-text">
               <!-- 新闻的标题 -->
               <div class="news-text-title">

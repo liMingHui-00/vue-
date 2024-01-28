@@ -2,35 +2,54 @@
   <div class="comment-section-container">
     <div class="comment-card">
       <div class="comment-card-header">
-        <span class="header-title">评论 25</span>
+        <span class="header-title">评论 {{ commentTatol.msg }}</span>
       </div>
       <div class="comment-list">
         <!-- Comment item -->
-        <div class="comment-item" v-for="comment in comments" :key="comment.id">
+        <div
+          class="comment-item"
+          v-for="comment in commentTatol.msg"
+          :key="comment.id"
+        >
           <div class="comment-item-layout">
-            <div class="comment-avatar"></div>
+            <div class="comment-avatar">
+              <!-- 头像 -->
+              <i class="iconfont icon-yonghu"></i>
+            </div>
             <div class="comment-details">
               <div class="comment-author-and-content">
-                <span class="comment-author">{{ comment.author }}</span>
-                <span>{{ comment.content }}</span>
+                <span class="comment-author"
+                  >{{ generateRandomChineseName() }}：</span
+                >
+                <span>{{ generateRandomComment() }}</span>
               </div>
-              <div class="comment-date">回复 · {{ comment.date }}</div>
+              <div class="comment-date">回复 · {{ generateCommentTime() }}</div>
             </div>
             <div class="comment-interactions">
               {{ comment.interactions }} 位
             </div>
           </div>
         </div>
-        <div class="view-all-comments">查看全部 25 条评论</div>
+        <div class="view-all-comments">
+          查看全部 {{ commentTatol.msg }} 条评论
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-let comments = defineProps(["msg"])
-console.log(comments)
-// let comments = ref(["1", 2, 3, 4, 5, 6, 7])
+import { useCommentsStore } from "@/store/comments"
+import generateLimitedTimeData from "@/mock/data.js"
+const generateCommentTime = () => {
+  return generateLimitedTimeData()
+}
+import { generateRandomChineseName } from "@/mock/name.js"
+
+import { generateRandomComment } from "@/mock/comment.js"
+const commentStore = useCommentsStore()
+console.log(commentStore.comments[0])
+let commentTatol = defineProps(["msg"])
 </script>
 
 <style scoped>

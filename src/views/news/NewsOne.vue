@@ -46,7 +46,6 @@ const fetchNewsDetail = async () => {
     )
     news.value = response.data
     msg.value = news.value.comment
-    console.log(news.value)
   } catch (error) {
     console.error("Error fetching news:", error)
     // 在这里处理错误，例如显示错误消息给用户
