@@ -26,7 +26,8 @@
               <div class="comment-date">回复 · {{ generateCommentTime() }}</div>
             </div>
             <div class="comment-interactions">
-              {{ comment.interactions }} 位
+              <!-- 点赞数 -->
+              {{ generateRandomInter() }} 👍
             </div>
           </div>
         </div>
@@ -47,6 +48,8 @@ const generateCommentTime = () => {
 import { generateRandomChineseName } from "@/mock/name.js"
 
 import { generateRandomComment } from "@/mock/comment.js"
+
+import { generateRandomInter } from "@/mock/likeNum.js"
 const commentStore = useCommentsStore()
 console.log(commentStore.comments[0])
 let commentTatol = defineProps(["msg"])
