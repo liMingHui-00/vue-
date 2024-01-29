@@ -7,6 +7,10 @@ export const userLayoutNewsService = () => {
 export const useRankListService = () => {
   return request.get("/ranklist")
 }
+// 热搜榜的换一换
+export const useUpdateListServe = () => {
+  return request.get("/updatelist")
+}
 // 获取新闻的详情
 export const useNewsDetails = (id) => {
   return request.get(`/news`, { params: { id } })
