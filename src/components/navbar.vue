@@ -29,7 +29,13 @@
           @click="console.log(searchMsg)"
         />
         <nav>
-          <el-button>登录</el-button>
+          <div v-if="loginSuccess">
+            <el-button @click="$router.push('/login')">登录</el-button>
+          </div>
+          <div v-else>
+            <!-- 头像 -->
+            <img :src="generateRandomAvatar()" />
+          </div>
         </nav>
       </div>
     </div>
@@ -37,8 +43,27 @@
 </template>
 
 <script setup>
+// 随机头像
+import { generateRandomAvatar } from "@/mock/avatar.js"
 // 搜索框的内容
-const searchMsg = ref("")
+let searchMsg = ref("")
+// 判断是否登录
+let loginSuccess = ref(true)
+// 获取本地存储的数据，判断是否登录
+const judgingLogin = () => {
+  const storeToken = localStorage.getItem("token")
+  const storeUser = localStorage.getItem("user")
+
+  if (storeToken && storeUser) {
+    loginSuccess.value = false
+    console.log("有用户", loginSuccess.value)
+  } else {
+    console.log("没有用户")
+  }
+}
+onMounted(() => {
+  judgingLogin()
+})
 </script>
 
 <style scoped>
