@@ -9,12 +9,12 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      imports: ["vue", "vue-router"],
+      imports: ["vue", "vue-router", "pinia"],
       dirs: ["./src/**/*"],
     }),
     Components({
       //  可以通过配置来达到自动导入你想要导入的组件
-      dirs: ["./src/components", "./src/views"],
+      dirs: ["./src/components", "./src/views", "./src/mock", "./src/store"],
     }),
   ],
   resolve: {

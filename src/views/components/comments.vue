@@ -14,7 +14,8 @@
           <div class="comment-item-layout">
             <div class="comment-avatar">
               <!-- 头像 -->
-              <i class="iconfont icon-yonghu"></i>
+              <!-- <i class="iconfont icon-yonghu"></i> -->
+              <img :src="generateRandomAvatar()" alt="" />
             </div>
             <div class="comment-details">
               <div class="comment-author-and-content">
@@ -40,18 +41,19 @@
 </template>
 
 <script setup>
-import { useCommentsStore } from "@/store/comments"
+// 时间
 import generateLimitedTimeData from "@/mock/data.js"
 const generateCommentTime = () => {
   return generateLimitedTimeData()
 }
+// 名字
 import { generateRandomChineseName } from "@/mock/name.js"
-
+// 评论
 import { generateRandomComment } from "@/mock/comment.js"
-
+// 点赞
 import { generateRandomInter } from "@/mock/likeNum.js"
-const commentStore = useCommentsStore()
-console.log(commentStore.comments[0])
+// 头像
+import { generateRandomAvatar } from "@/mock/avatar.js"
 let commentTatol = defineProps(["msg"])
 </script>
 
@@ -97,6 +99,7 @@ let commentTatol = defineProps(["msg"])
 }
 
 .comment-avatar {
+  border: 1px solid #000;
   width: 2.5rem; /* Tailwind class: w-10 */
   height: 2.5rem; /* Tailwind class: h-10 */
   background-color: #d1d5db; /* Tailwind class: bg-gray-300 */
