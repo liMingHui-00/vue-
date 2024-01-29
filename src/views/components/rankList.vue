@@ -9,7 +9,7 @@
       </span>
     </h3>
     <div class="container">
-      <div class="rank-item" v-for="(item, index) in rankList" :key="item.id">
+      <!-- <div class="rank-item" v-for="(item, index) in rankList" :key="item.id">
         <div class="rank-number" :class="getRankClass(index)">
           {{ index + 1 }}
         </div>
@@ -18,7 +18,22 @@
             {{ item.title }}
           </span>
         </div>
-      </div>
+      </div> -->
+      <router-link
+        :to="'/news/' + item.url"
+        class="rank-item"
+        v-for="(item, index) in rankList"
+        :key="item.id"
+      >
+        <div class="rank-number" :class="getRankClass(index)">
+          {{ index + 1 }}
+        </div>
+        <div class="rank-content">
+          <span class="item-title">
+            {{ item.title }}
+          </span>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -69,6 +84,8 @@ const getRankClass = (index) => {
 }
 
 .rank-item {
+  color: #222;
+  text-decoration: none;
   display: flex;
   height: 50px;
   align-items: center;
