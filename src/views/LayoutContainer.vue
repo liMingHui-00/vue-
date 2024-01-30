@@ -28,7 +28,7 @@
       </div>
       <div class="right">
         <!-- 右边的热搜榜 -->
-        <!-- <ranklist></ranklist> -->
+        <ranklist></ranklist>
       </div>
     </div>
   </div>
@@ -44,8 +44,9 @@ const Layout_news = ref([])
 let showContainer = ref(true)
 watch(
   () => route.path,
-  () => {
-    showContainer.value = !showContainer.value
+  (newPath) => {
+    // 当路径是 http://localhost:5173/ 时，设置 showContainer.value 为 true 否则就是false
+    showContainer.value = newPath === "/"
   }
 )
 // 滑动加载
@@ -94,20 +95,18 @@ onUnmounted(() => {
 }
 
 .left {
-  flex: 0 0 70%;
+  flex: 0 0 60%;
   /* border: 1px solid #000; */
   /* 左侧部分占据75%的宽度 */
   /* 为了保证内容靠左显示，可以添加对齐样式 */
   text-align: left;
-  margin: 10px 150px;
 }
 
 .right {
-  flex: 0 0 25%;
+  flex: 0 0 20%;
   margin: 10px;
   padding: 10px;
-  /* border: 1px solid #000; */
-  /* 右侧部分占据25%的宽度 */
+  /* 右侧部分占据20%的宽度 */
 }
 
 .news-item {

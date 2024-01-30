@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- 新闻部分 -->
-    <div class="news-section">
+    <div class="news-section" ref="el">
       <!-- 替换为实际新闻项目 -->
       <router-link
         :to="'/news/' + news.url"
@@ -29,9 +29,22 @@
 
 <script setup>
 import { useRecommendedNewsServer } from "@/api/news"
+import { useInfiniteScroll } from "@vueuse/core"
 import RankList from "./components/rankList.vue"
 let newsData = ref([])
 let rankingsData = ref([])
+// 滚动加载
+const el = ref(null)
+// 当滚动到底部时加载数据，
+const loadMoreNews = async () => {
+  const { data } = await useRecommendedNewsServer()
+  newsData.value.push(...data)
+}
+useInfiniteScroll(el, loadMoreNews, {
+  distance: 50,
+  // 节流
+  interval: 200,
+})
 onMounted(async () => {
   const { data } = await useRecommendedNewsServer()
   newsData.value = data

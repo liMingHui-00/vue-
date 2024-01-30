@@ -22,6 +22,7 @@
       <router-link
         :to="'/news/' + item.url"
         class="rank-item"
+        @click.native="forceReload(item.url)"
         v-for="(item, index) in rankList"
         :key="item.id"
       >
@@ -52,7 +53,11 @@ const updateHotSearch = async () => {
   const { data } = await useUpdateListServe()
   rankList.value = data
 }
-
+const forceReload = (url) => {
+  router.push(`/news/${url}`).then(() => {
+    router.go()
+  })
+}
 const getRankClass = (index) => {
   if (index === 0) {
     return "red-strong"

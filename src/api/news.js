@@ -19,3 +19,7 @@ export const useNewsDetails = (id) => {
 export const useRecommendedNewsServer = () => {
   return request.get("/recommend")
 }
+// 排行榜新闻点击跳转
+export const useNewsDetailServer = (newsId) => {
+  return request.get(`/news/${newsId}`)
+}
