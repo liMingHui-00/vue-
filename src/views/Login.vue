@@ -1,5 +1,4 @@
 <template>
-  <!-- <router-view></router-view> -->
   <div class="container">
     <div class="form-container">
       <div class="form-header">
@@ -56,11 +55,10 @@
 <script setup>
 import { userRegisterService, userLoginService } from "@/api/user"
 import { useUserStore } from "@/store/user"
-import { ElMessage } from "element-plus"
-import { ref } from "vue"
 import { useRouter } from "vue-router"
-const router = useRouter()
 
+const router = useRouter()
+import { generateRandomAvatar } from "@/mock/avatar.js"
 // 创建一个变量记录是否是注册页面
 let showRegister = ref(true)
 const userStore = useUserStore()
@@ -69,17 +67,20 @@ let loginForm = ref({ username: "", password: "" })
 async function register() {
   // 开启请求
   await userRegisterService(registerForm.value)
-  // console.log('注册成功')
   ElMessage({ message: "注册成功", type: "success" })
   // 注册成功后把user存储在store中
   userStore.setToken(registerForm.value)
+  // 注册成功后，把页面变成登录页
+  showRegister.value = false
 }
 
 async function login() {
   await userLoginService(loginForm.value)
     .then((response) => {
+      // 存储token
       localStorage.setItem("token", response.data.token)
-      // console.log("登录成功")
+      // 存储头像
+      localStorage.setItem("avatar", generateRandomAvatar())
       ElMessage({ message: "登录成功", type: "success" })
       // 跳转
       router.push("/")

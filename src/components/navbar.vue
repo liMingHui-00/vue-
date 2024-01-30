@@ -34,7 +34,7 @@
           </div>
           <div v-else>
             <!-- 头像 -->
-            <img :src="generateRandomAvatar()" />
+            <img :src="imageAvatar" />
           </div>
         </nav>
       </div>
@@ -43,8 +43,6 @@
 </template>
 
 <script setup>
-// 随机头像
-import { generateRandomAvatar } from "@/mock/avatar.js"
 // 搜索框的内容
 let searchMsg = ref("")
 // 判断是否登录
@@ -52,13 +50,9 @@ let loginSuccess = ref(true)
 // 获取本地存储的数据，判断是否登录
 const judgingLogin = () => {
   const storeToken = localStorage.getItem("token")
-  const storeUser = localStorage.getItem("user")
-
-  if (storeToken && storeUser) {
+  const imageAvatar = localStorage.getItem("avatar")
+  if (storeToken) {
     loginSuccess.value = false
-    console.log("有用户", loginSuccess.value)
-  } else {
-    console.log("没有用户")
   }
 }
 onMounted(() => {
@@ -74,11 +68,6 @@ onMounted(() => {
   height: 50px;
   background-color: #292c2f;
   color: #ffffff;
-
-  /*吸顶效果*/
-  /* position: sticky;
-        position: -webkit-sticky;    !*兼容 -webkit 内核的浏览器*!
-        top: 0px;                    !*必须设一个值，否则不生效*!*/
 }
 
 .box {

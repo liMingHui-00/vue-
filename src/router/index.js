@@ -25,14 +25,13 @@ const router = createRouter({
       component: () => import("@/views/Recommend.vue"),
     },
   ],
-}) // 登录拦截
+})
 router.beforeEach(async (to) => {
-  const userStore = useUserStore()
-  if (!userStore.token && to.path !== "/login") {
-    console.log(userStore.token)
+  const token = localStorage.getItem("token")
+  // 如果没有token，或者去的页面不是登录页，则拦截页面到登录
+  if (!token && to.path !== "/login") {
     return "/login"
   }
   return true
 })
-
 export default router
