@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <h3 class="title">
       <span class="titleLeft">
         <i class="iconfont icon-huomiao"></i> 热搜榜
@@ -68,39 +68,42 @@ const getRankClass = (index) => {
 
 <style lang="scss" scoped>
 @import "@/assets/hotSearchNum.scss"; // Assuming this is an SCSS file now
+.content {
+  width: 450px;
+  .title {
+    display: flex;
+    justify-content: space-between;
 
-.title {
-  display: flex;
-  justify-content: space-between;
-
-  &Left,
-  &Right {
-    font-size: larger;
-    .iconfont {
+    &Left,
+    &Right {
       font-size: larger;
-      color: red;
+      cursor: pointer;
+      .iconfont {
+        font-size: larger;
+        color: red;
+      }
     }
   }
-}
 
-.rank-item {
-  color: #222;
-  text-decoration: none;
-  display: flex;
-  height: 50px;
-  align-items: center;
+  .rank-item {
+    color: #222;
+    text-decoration: none;
+    display: flex;
+    height: 50px;
+    align-items: center;
 
-  .rank-number {
-    width: 30px;
-    text-align: left;
-    font-weight: bold;
-  }
-
-  .rank-content {
-    flex-grow: 1;
-
-    .item-title {
+    .rank-number {
+      width: 30px;
+      text-align: left;
       font-weight: bold;
+    }
+
+    .rank-content {
+      flex-grow: 1;
+
+      .item-title {
+        font-weight: bold;
+      }
     }
   }
 }

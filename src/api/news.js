@@ -15,3 +15,7 @@ export const useUpdateListServe = () => {
 export const useNewsDetails = (id) => {
   return request.get(`/news`, { params: { id } })
 }
+// 获取推荐页面的新闻
+export const useRecommendedNewsServer = () => {
+  return request.get("/recommend")
+}
