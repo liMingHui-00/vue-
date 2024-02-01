@@ -19,8 +19,8 @@
     </main>
 
     <aside class="news-aside">
-      <!-- 排行榜 -->
-      <RankList></RankList>
+      <!--  侧边栏  点赞  评论  收藏 -->
+      <sidebar></sidebar>
     </aside>
     <footer>
       <!-- 评论 -->
@@ -31,7 +31,6 @@
 
 <script setup>
 import { useRoute } from "vue-router"
-import RankList from "../components/rankList.vue"
 import Comments from "../components/comments.vue"
 import { useNewsDetailServer } from "@/api/news"
 const route = useRoute()
@@ -41,23 +40,9 @@ const msg = ref([])
 // 定义异步请求函数
 const fetchNewsDetail = async () => {
   const response = await useNewsDetailServer(route.params.id)
-  console.log(route.params.id)
   news.value = response.data
   msg.value = news.value.comment
 }
-// const fetchNewsDetail = async () => {
-//   try {
-//     const response = await axios.get(
-//       `http://localhost:3000/news/${route.params.id}`
-//     )
-//     news.value = response.data
-//     msg.value = news.value.comment
-//   } catch (error) {
-//     console.error("Error fetching news:", error)
-// 在这里处理错误，例如显示错误消息给用户
-//   }
-// }
-
 // 使用 onMounted 钩子
 onMounted(() => {
   fetchNewsDetail()

@@ -11,6 +11,10 @@ const router = createRouter({
       component: () => import("@/views/Login.vue"),
     },
     {
+      path: "/person",
+      component: () => import("@/components/personInfo.vue"),
+    },
+    {
       path: "/",
       component: () => import("@/views/LayoutContainer.vue"),
       children: [...NewsOneRoutes],
