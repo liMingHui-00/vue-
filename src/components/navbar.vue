@@ -34,7 +34,7 @@
           </div>
           <div v-else>
             <!-- 头像 -->
-            <img :src="imageAvatar" />
+            <img :src="imageAvatar" @click="$router.push('/person')" />
           </div>
         </nav>
       </div>
@@ -85,6 +85,7 @@ h1 {
 img {
   width: 40px;
   height: 40px;
+  cursor: pointer;
 }
 
 nav {
