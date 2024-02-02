@@ -36,6 +36,10 @@
 </template>
 
 <script setup>
+import { useRoute } from "vue-router"
+const route = useRoute()
+import { useNewsStore } from "@/store/news"
+const newsStore = useNewsStore()
 // 点赞数
 import { generateRandomInter } from "@/mock/likeNum"
 let likeCount = ref(generateRandomInter())
@@ -63,7 +67,16 @@ function moveCommentSection() {
 }
 // 收藏新闻
 function collectNew() {
-  shoucang.value.style.color = "red"
+  if (shoucang.value.style.color === "red") {
+    shoucang.value.style.color = "#222"
+    newsStore.deleteNews(route.params.id)
+    console.log("删除", newsStore.newsLikeArr)
+  } else {
+    shoucang.value.style.color = "red"
+    // 把它收藏到store中
+    newsStore.collectNews(route.params.id)
+    console.log("收藏", newsStore.newsLikeArr)
+  }
 }
 </script>
 
