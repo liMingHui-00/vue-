@@ -1,23 +1,29 @@
 <template>
-  <div>个人中心模块</div>
-
   <div class="container">
-    <div class="profile">
-      <img
-        class="profile-image"
-        src="https://placehold.co/64"
-        alt="Profile image placeholder"
-      />
-      <div class="user-info">
-        <h2 class="username">用户名</h2>
-        <p class="user-description">用户简介或其他信息</p>
+    <div class="container-top">
+      <div class="profile">
+        <img
+          class="profile-image"
+          src="https://placehold.co/64"
+          alt="Profile image placeholder"
+        />
+        <div class="user-info">
+          <h2 class="username">用户名</h2>
+          <p class="user-description">用户简介或其他信息</p>
+        </div>
       </div>
-      <button class="follow-button">关注</button>
+      <div class="stats">
+        <span class="followers"
+          >关注者 <br />
+          &nbsp;&nbsp;&nbsp; 0</span
+        >
+        <span class="following"
+          >关注 <br />
+          &nbsp;&nbsp;0</span
+        >
+      </div>
     </div>
-    <div class="stats">
-      <span class="followers">关注者 0</span>
-      <span class="following">关注 0</span>
-    </div>
+    <div class="navigation">收藏 点赞</div>
     <div class="comments">
       <div class="comment">
         <img
@@ -40,48 +46,47 @@
 
 <style lang="scss" scoped>
 .container {
-  max-width: 640px;
+  border: 1px solid #000;
   background: #fff;
   padding: 1.5rem;
   border-radius: 0.5rem;
+  margin: 0 auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  .profile {
+  .container-top {
+    width: 1230px;
     display: flex;
     align-items: center;
-    .profile-image {
-      border-radius: 9999px;
-      border: 1px solid #d1d5db;
-      margin-right: 1rem;
-    }
-    .user-info {
-      .username {
-        font-size: 1.25rem;
-        font-weight: 600;
-      }
-      .user-description {
-        color: #6b7280;
-      }
-    }
-    .follow-button {
-      margin-left: auto;
-      background-color: #3b82f6;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 0.375rem;
-      cursor: pointer;
-      &:hover {
-        background-color: #2563eb;
-      }
-    }
-  }
-  .stats {
-    display: flex;
     justify-content: space-between;
-    margin: 1rem 0;
-    .followers,
-    .following {
-      color: #4b5563;
-      font-weight: 600;
+    .profile {
+      display: flex;
+      align-items: center;
+      .profile-image {
+        border-radius: 9999px;
+        border: 1px solid #d1d5db;
+        margin-right: 1rem;
+      }
+      .user-info {
+        .username {
+          font-size: 1.25rem;
+          font-weight: 600;
+        }
+        .user-description {
+          color: #6b7280;
+        }
+      }
+    }
+    .stats {
+      border: 1px solid #000;
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0;
+      width: 410px;
+      .followers,
+      .following {
+        color: #4b5563;
+        font-weight: 600;
+        cursor: pointer;
+      }
     }
   }
   .comments {
