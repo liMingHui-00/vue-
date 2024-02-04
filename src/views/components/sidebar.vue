@@ -70,12 +70,12 @@ function collectNew() {
   if (shoucang.value.style.color === "red") {
     shoucang.value.style.color = "#222"
     newsStore.deleteNews(route.params.id)
-    console.log("删除", newsStore.newsLikeArr)
+    console.log("删除", newsStore.newsFavoriteArr)
   } else {
     shoucang.value.style.color = "red"
     // 把它收藏到store中
     newsStore.collectNews(route.params.id)
-    console.log("收藏", newsStore.newsLikeArr)
+    console.log("收藏", newsStore.newsFavoriteArr)
   }
 }
 </script>

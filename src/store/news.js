@@ -4,17 +4,19 @@ export const useNewsStore = defineStore(
   "news",
   () => {
     // 用来收藏新闻
-    const newsLikeArr = ref([])
+    const newsFavoriteArr = ref([])
     const collectNews = (id) => {
       // 检查是否已经存在
-      if (!newsLikeArr.value.includes(id)) {
-        newsLikeArr.value.push(id)
+      if (!newsFavoriteArr.value.includes(id)) {
+        newsFavoriteArr.value.push(id)
       }
     }
     const deleteNews = (id) => {
-      newsLikeArr.value = newsLikeArr.value.filter((item) => item !== id)
+      newsFavoriteArr.value = newsFavoriteArr.value.filter(
+        (item) => item !== id
+      )
     }
-    return { newsLikeArr, collectNews, deleteNews }
+    return { newsFavoriteArr, collectNews, deleteNews }
   },
   { persist: true }
 )
