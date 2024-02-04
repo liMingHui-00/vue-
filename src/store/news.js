@@ -16,7 +16,26 @@ export const useNewsStore = defineStore(
         (item) => item !== id
       )
     }
-    return { newsFavoriteArr, collectNews, deleteNews }
+    // 用来点赞新闻的
+    const newsLikeArr = ref([])
+    const thumbsNews = (id) => {
+      // 检查是否存在
+      if (!newsLikeArr.value.includes(id)) {
+        newsLikeArr.value.push(id)
+      }
+    }
+    const deleteNewsLike = (id) => {
+      newsLikeArr.value = newsLikeArr.value.filter((item) => item !== id)
+    }
+
+    return {
+      newsFavoriteArr,
+      collectNews,
+      deleteNews,
+      newsLikeArr,
+      thumbsNews,
+      deleteNewsLike,
+    }
   },
   { persist: true }
 )
