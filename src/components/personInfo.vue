@@ -47,21 +47,48 @@
       </div>
     </div>
     <!-- 收藏 -->
+    <div class="likenews" v-if="isFavorite">
+      <div v-for="news in favoriteNews" :key="news.id" class="news-item">
+        <router-link :to="'/news/' + news.url">
+          <div class="news-text">
+            <div class="news-text-title">
+              {{ news.title }}
+            </div>
+            <div class="news-text-other">
+              <span>{{ news.type }}</span>
+              <span>{{ news.time }}</span>
+              <span>{{ news.comment }}评论</span>
+            </div>
+          </div>
+          <div class="news-image">
+            <img :src="news.image" alt="" />
+          </div>
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { useLikeNewsService } from "@/api/news"
+import { useFavoriteNewsService } from "@/api/news"
 let isFavorite = ref(false)
 let isLike = ref(false)
 // 点赞新闻列表
 let likeNews = ref([])
+// 收藏新闻列表
+let favoriteNews = ref([])
 // 点击改变颜色  改变内容
-const toggleFavorite = () => {
+const toggleFavorite = async () => {
   // 展示收藏
   // 改变颜色
   isFavorite.value = true
   isLike.value = false
+  const {
+    data: { data },
+  } = await useFavoriteNewsService()
+  favoriteNews.value = data
+  console.log(favoriteNews.value)
 }
 const toggleLike = async () => {
   // 展示点赞

@@ -29,3 +29,8 @@ export const useNewsDetailServer = (newsId) => {
 export const useLikeNewsService = () => {
   return request.get("/likenews")
 }
+// 收藏新闻
+
+export const useFavoriteNewsService = () => {
+  return request.get("/favoritenews")
+}
