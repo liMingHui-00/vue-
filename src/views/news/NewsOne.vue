@@ -28,7 +28,7 @@
     </footer>
   </div>
 </template>
-
+<!-- 点击收藏后，把数据存储到数据库，然后调用数据库 -->
 <script setup>
 import { useRoute } from "vue-router"
 import Comments from "../components/comments.vue"

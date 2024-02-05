@@ -52,6 +52,8 @@ function changeColor() {
   dianzanEle.value.style.color = "red"
   dianzanEle.value.style.fontSize = "30px"
   likeCount.value++
+  // 点赞新闻
+  newsStore.thumbsNews(route.params.id)
 }
 // 点击达到批评区
 function moveCommentSection() {

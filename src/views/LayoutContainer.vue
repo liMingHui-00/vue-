@@ -122,7 +122,6 @@ onUnmounted(() => {
   width: 100%;
   text-decoration: none;
   /* 移除下划线 */
-  color: inherit;
   /* 继承父元素的字体颜色 */
   display: block;
   /* 使a标签占据整个.news-item */

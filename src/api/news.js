@@ -23,3 +23,9 @@ export const useRecommendedNewsServer = () => {
 export const useNewsDetailServer = (newsId) => {
   return request.get(`/news/${newsId}`)
 }
+// 个人新闻
+// 1是点赞   2是收藏   0是都不是
+// 点赞新闻
+export const useLikeNewsService = () => {
+  return request.get("/likenews")
+}
