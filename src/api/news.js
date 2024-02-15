@@ -17,7 +17,7 @@ export const useNewsDetails = (id) => {
 }
 // 获取推荐页面的新闻
 export const useRecommendedNewsServer = () => {
-  return request.get("/recommend")
+  return request.get("/news")
 }
 // 排行榜新闻点击跳转
 export const useNewsDetailServer = (newsId) => {
