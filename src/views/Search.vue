@@ -32,9 +32,9 @@ import { useRoute } from "vue-router"
 const route = useRoute()
 // 搜索的新闻列表
 const searchArr = ref([])
-import { useSearchDataService } from "@/api/news"
+import { useSearchDataServer } from "@/api/news"
 async function getNews(searchMsg) {
-  const searchData = await useSearchDataService(searchMsg)
+  const searchData = await useSearchDataServer(searchMsg)
   // 直接赋值确保每次搜索结果都是最新的
   searchArr.value = searchData.data
 }

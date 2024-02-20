@@ -35,6 +35,10 @@ export const useFavoriteNewsService = () => {
   return request.get("/favoritenews")
 }
 // 搜索新闻
-export const useSearchDataService = (searchmsg) => {
+export const useSearchDataServer = (searchmsg) => {
   return request.get("/search", { params: { searchmsg } })
+}
+// 热点新闻
+export const useHotNewsServer = () => {
+  return request.get("/hot")
 }
