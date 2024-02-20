@@ -38,7 +38,8 @@
 </template>
 
 <script setup>
-import { useSearchDataService } from "@/api/news"
+import { useRouter } from "vue-router"
+const router = useRouter()
 // 搜索框的内容
 let searchMsg = ref("")
 // 判断是否登录
@@ -54,8 +55,12 @@ const judgingLogin = () => {
 //搜索新闻
 const searchData = async () => {
   //!                                      老是忘记这个value
-  const data = await useSearchDataService(searchMsg.value)
-  console.log(data)
+  router.push({
+    path: "/search",
+    query: {
+      searchMsg: searchMsg.value,
+    },
+  })
 }
 onMounted(() => {
   judgingLogin()
