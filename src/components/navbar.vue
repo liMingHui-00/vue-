@@ -22,12 +22,7 @@
           v-model="searchMsg"
           name="search"
         />
-        <input
-          class="button"
-          type="button"
-          value="搜索"
-          @click="console.log(searchMsg)"
-        />
+        <input class="button" type="button" value="搜索" @click="searchData" />
         <nav>
           <div v-if="loginSuccess">
             <el-button @click="$router.push('/login')">登录</el-button>
@@ -43,6 +38,7 @@
 </template>
 
 <script setup>
+import { useSearchDataService } from "@/api/news"
 // 搜索框的内容
 let searchMsg = ref("")
 // 判断是否登录
@@ -54,6 +50,12 @@ const judgingLogin = () => {
   if (storeToken) {
     loginSuccess.value = false
   }
+}
+//搜索新闻
+const searchData = async () => {
+  //!                                      老是忘记这个value
+  const data = await useSearchDataService(searchMsg.value)
+  console.log(data)
 }
 onMounted(() => {
   judgingLogin()

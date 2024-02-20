@@ -34,3 +34,7 @@ export const useLikeNewsService = () => {
 export const useFavoriteNewsService = () => {
   return request.get("/favoritenews")
 }
+// 搜索新闻
+export const useSearchDataService = (searchmsg) => {
+  return request.get("/search", { params: { searchmsg } })
+}
