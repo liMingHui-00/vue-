@@ -3,7 +3,9 @@
     <div class="comment-card">
       <div class="comment-card-header">
         <span class="header-title">评论 {{ commentTatol.msg }}</span>
+        <postComments @comment-submit="handleCommentSumit"></postComments>
       </div>
+
       <div class="comment-list">
         <!-- Comment item -->
         <div
@@ -43,6 +45,7 @@
 <script setup>
 // 时间
 import generateLimitedTimeData from "@/mock/data.js"
+import postComments from "@/components/postComments.vue"
 const generateCommentTime = () => {
   return generateLimitedTimeData()
 }
@@ -55,6 +58,9 @@ import { generateRandomInter } from "@/mock/likeNum.js"
 // 头像
 import { generateRandomAvatar } from "@/mock/avatar.js"
 let commentTatol = defineProps(["msg"])
+const handleCommentSumit = (commentData) => {
+  console.log(commentData)
+}
 </script>
 
 <style scoped>
