@@ -37,6 +37,10 @@
 
 <script setup>
 import { useRoute } from "vue-router"
+import {
+  useLikeNewsButtonServer,
+  useFavoriteNewsButtonServer,
+} from "@/api/news"
 const route = useRoute()
 import { useNewsStore } from "@/store/news"
 const newsStore = useNewsStore()
@@ -48,12 +52,20 @@ let commentCount = ref(generateRandomInter())
 const dianzanEle = ref(null)
 const shoucang = ref(null)
 // 点击改变颜色
-function changeColor() {
+async function changeColor() {
   dianzanEle.value.style.color = "red"
   dianzanEle.value.style.fontSize = "30px"
   likeCount.value++
   // 点赞新闻
   newsStore.thumbsNews(route.params.id)
+  await useLikeNewsButtonServer(route.params.id)
+    .then(() => {
+      ElMessage({ message: "点赞成功", type: "success" })
+    })
+    .catch((error) => {
+      console.error(error) // 处理错误情况
+      ElMessage({ message: "点赞失败", type: "error" })
+    })
 }
 // 点击达到批评区
 function moveCommentSection() {
@@ -68,7 +80,7 @@ function moveCommentSection() {
   })
 }
 // 收藏新闻
-function collectNew() {
+async function collectNew() {
   if (shoucang.value.style.color === "red") {
     shoucang.value.style.color = "#222"
     newsStore.deleteNews(route.params.id)
@@ -77,7 +89,14 @@ function collectNew() {
     shoucang.value.style.color = "red"
     // 把它收藏到store中
     newsStore.collectNews(route.params.id)
-    console.log("收藏", newsStore.newsFavoriteArr)
+    await useFavoriteNewsButtonServer(route.params.id)
+      .then(() => {
+        ElMessage({ message: "收藏成功", type: "success" })
+      })
+      .catch((error) => {
+        console.error(error) // 处理错误情况
+        ElMessage({ message: "收藏失败", type: "error" })
+      })
   }
 }
 </script>

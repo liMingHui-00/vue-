@@ -30,9 +30,16 @@ export const useLikeNewsService = () => {
   return request.get("/likenews")
 }
 // 收藏新闻
-
 export const useFavoriteNewsService = () => {
   return request.get("/favoritenews")
+}
+// 通过按钮把新闻设置为点赞
+export const useLikeNewsButtonServer = (newsid) => {
+  return request.post("/setlikenews", { newsid })
+}
+// 通过按钮把新闻设置为收藏
+export const useFavoriteNewsButtonServer = (newsid) => {
+  return request.post("/setfavoritenews", { newsid })
 }
 // 搜索新闻
 export const useSearchDataServer = (searchmsg) => {
