@@ -29,7 +29,10 @@
           </div>
           <div v-else>
             <!-- 头像 -->
-            <img :src="imageAvatar" @click="$router.push('/person')" />
+            <img
+              src="http://dummyimage.com/40x40/f28e79/7986f2&text=J"
+              @click="$router.push('/person')"
+            />
           </div>
         </nav>
       </div>
@@ -47,7 +50,6 @@ let loginSuccess = ref(true)
 // 获取本地存储的数据，判断是否登录
 const judgingLogin = () => {
   const storeToken = localStorage.getItem("token")
-  const imageAvatar = localStorage.getItem("avatar")
   if (storeToken) {
     loginSuccess.value = false
   }
