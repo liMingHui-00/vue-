@@ -32,7 +32,7 @@
               <button
                 class="comment-interactions-btn"
                 ref="likeNum"
-                @click="likeNumUp(e)"
+                @click.once="likeNumUp(comment)"
               >
                 {{ generateRandomInter() }} 👍
               </button>
@@ -70,8 +70,18 @@ const handleCommentSumit = (commentData) => {
 // 获取点赞的数量
 const likeNum = ref(null)
 // 点击增加点赞数
-const likeNumUp = (e) => {
-  console.log(e)
+const likeNumUp = (comment) => {
+  // 先获取页面中点赞的部分
+  const str = likeNum.value[comment - 1].innerHTML
+  // 然后把字符串中的点赞数取出来
+  const oldNumber = parseInt(str.match(/\d+/)[0], 10)
+  let newNumber
+  newNumber = oldNumber + 1
+  // 点赞增加后重新赋值给页面
+  likeNum.value[comment - 1].innerHTML = newNumber + "👍"
+  const button = document.querySelectorAll(".comment-interactions-btn")
+  // 点赞后颜色改变
+  button[comment - 1].style.color = "red"
 }
 </script>
 
