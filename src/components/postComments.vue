@@ -23,9 +23,9 @@
         />
         <!-- 评论内容 -->
         <p class="comment-main">{{ comment.text }}</p>
-        <button class="like-btn" @click="likeComment(index)">
+        <button class="like-btn" @click.once="likeComment(index)">
           <!-- 点赞数 -->
-          <span>{{ comment.likes }}</span> &nbsp; 👍
+          <span class="like-btn-num">{{ comment.likes }}</span> &nbsp; 👍
         </button>
         <div class="comment-footer">
           <!-- 时间 -->
@@ -59,6 +59,8 @@ const submitComment = () => {
 
 const likeComment = (index) => {
   comments.value[index].likes++
+  const button = document.querySelector(".like-btn-num")
+  button.style.color = "red"
 }
 </script>
 
@@ -123,7 +125,7 @@ const likeComment = (index) => {
 .like-btn {
   position: absolute;
   top: 15px;
-  left: 425px;
+  left: 555px;
   background: none;
   border: none;
   color: #000;
