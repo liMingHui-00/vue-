@@ -29,12 +29,37 @@
       <div class="right">
         <!-- 右边的热搜榜 -->
         <ranklist></ranklist>
+        <div
+          ref="el"
+          :style="{
+            display: buttonDisplay,
+          }"
+          class="goTop"
+          @click="goTopHandle"
+        >
+          <i class="iconfont icon-jiantoushang"></i>
+          回顶部
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useWindowScroll } from "@vueuse/core"
+const { y: scrollY } = useWindowScroll()
+const buttonDisplay = ref("none") // 控制按钮显示的状态
+// 监视滚动条
+watch(scrollY, () => {
+  if (scrollY.value > 760) {
+    // 显示回顶部按钮
+    buttonDisplay.value = "block"
+  } else {
+    // 否则隐藏按钮
+    buttonDisplay.value = "none"
+  }
+})
+const el = ref(null)
 import { useRoute } from "vue-router"
 const route = useRoute()
 // import { userLayoutNewsService } from "@/api/news"
@@ -55,7 +80,6 @@ const loadMoreNews = async () => {
   if (isLoading.value) return
   isLoading.value = true
   const res = await userLayoutNewsService()
-  // console.log(res)
   Layout_news.value.push(...res.data)
   isLoading.value = false
 }
@@ -80,6 +104,19 @@ onMounted(async () => {
     handleScroll()
   }
 })
+
+// 点击回到顶部
+const goTopHandle = () => {
+  // 点击按钮，使得页面返回顶部
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  })
+  // 通过设置一个小延迟来等待滚动完成，再更新按钮的显示状态
+  setTimeout(() => {
+    buttonDisplay.value = "none"
+  }, 300)
+}
 
 onUnmounted(() => {
   window.removeEventListener("scroll", checkScroll)
@@ -167,5 +204,14 @@ onUnmounted(() => {
   /* 图片宽度自适应容器 */
   height: 100px;
   /* 高度自动，保持图片比例 */
+}
+.goTop {
+  position: fixed;
+  left: 1426px;
+  top: 686px;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px rgba(153, 153, 153, 0.18);
+  color: rgb(43, 43, 43);
 }
 </style>

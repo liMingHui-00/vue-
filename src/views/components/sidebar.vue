@@ -85,6 +85,7 @@ async function collectNew() {
     shoucang.value.style.color = "#222"
     newsStore.deleteNews(route.params.id)
     console.log("删除", newsStore.newsFavoriteArr)
+    ElMessage({ message: "取消收藏", type: "success" })
   } else {
     shoucang.value.style.color = "red"
     // 把它收藏到store中

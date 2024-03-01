@@ -16,7 +16,6 @@
           <div class="comment-item-layout">
             <div class="comment-avatar">
               <!-- 头像 -->
-              <!-- <i class="iconfont icon-yonghu"></i> -->
               <img :src="generateRandomAvatar()" alt="" />
             </div>
             <div class="comment-details">
@@ -30,7 +29,13 @@
             </div>
             <div class="comment-interactions">
               <!-- 点赞数 -->
-              {{ generateRandomInter() }} 👍
+              <button
+                class="comment-interactions-btn"
+                ref="likeNum"
+                @click="likeNumUp(e)"
+              >
+                {{ generateRandomInter() }} 👍
+              </button>
             </div>
           </div>
         </div>
@@ -57,9 +62,16 @@ import { generateRandomComment } from "@/mock/comment.js"
 import { generateRandomInter } from "@/mock/likeNum.js"
 // 头像
 import { generateRandomAvatar } from "@/mock/avatar.js"
+import { ref } from "vue"
 let commentTatol = defineProps(["msg"])
 const handleCommentSumit = (commentData) => {
   console.log(commentData)
+}
+// 获取点赞的数量
+const likeNum = ref(null)
+// 点击增加点赞数
+const likeNumUp = (e) => {
+  console.log(e)
 }
 </script>
 
@@ -133,7 +145,9 @@ const handleCommentSumit = (commentData) => {
   color: #6b7280; /* Tailwind class: text-gray-400 */
   font-size: 0.875rem; /* Tailwind class: text-sm */
 }
-
+.comment-interactions-btn {
+  border: none;
+}
 .view-all-comments {
   text-align: center;
   color: #6b7280; /* Tailwind class: text-gray-500 */

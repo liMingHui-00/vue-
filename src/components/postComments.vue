@@ -25,7 +25,7 @@
         <p class="comment-main">{{ comment.text }}</p>
         <button class="like-btn" @click="likeComment(index)">
           <!-- 点赞数 -->
-          👍 <span>{{ comment.likes }}</span>
+          <span>{{ comment.likes }}</span> &nbsp; 👍
         </button>
         <div class="comment-footer">
           <!-- 时间 -->
@@ -116,20 +116,19 @@ const likeComment = (index) => {
           content: "回复：";
           color: rgb(107, 114, 128);
         }
-
-        .like-btn {
-          position: absolute;
-          top: 0;
-          left: 0;
-          background: none;
-          border: none;
-          color: white;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-        }
       }
     }
   }
+}
+.like-btn {
+  position: absolute;
+  top: 15px;
+  left: 425px;
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 </style>
