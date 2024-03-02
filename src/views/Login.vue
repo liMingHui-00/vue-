@@ -88,7 +88,7 @@ async function login() {
       // 跳转
       router.push("/")
     })
-    .catch(() => console.log("用户名或者密码无效"))
+    .catch(() => ElMessage({ message: "用户名或者密码无效", type: "error" }))
 }
 function toggleForm() {
   showRegister.value = !showRegister.value
