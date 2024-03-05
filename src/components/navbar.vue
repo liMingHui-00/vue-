@@ -1,5 +1,6 @@
 <template>
   <div>
+    <video src="@/assets/bgvideo.mp4" muted="muted" autoplay="autoplay"></video>
     <!-- 导航条 -->
     <div class="header">
       <div class="box">
@@ -29,10 +30,7 @@
           </div>
           <div v-else>
             <!-- 头像 -->
-            <img
-              src="http://dummyimage.com/40x40/f28e79/7986f2&text=J"
-              @click="$router.push('/person')"
-            />
+            <img src="@/assets/avatar.png" @click="$router.push('/person')" />
           </div>
         </nav>
       </div>
@@ -70,12 +68,19 @@ onMounted(() => {
 </script>
 
 <style scoped>
+video {
+  width: 100%;
+  height: 370px;
+  object-fit: cover;
+  position: absolute;
+  z-index: -9999;
+}
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
-  background-color: #292c2f;
+  height: 370px;
+  /* background-color: #292c2f; */
   color: #ffffff;
 }
 
@@ -92,8 +97,8 @@ h1 {
 }
 
 img {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
 }
 
@@ -101,15 +106,15 @@ nav {
   display: flex;
   align-items: center;
   margin: 0px 40px;
-  font: 16px Arial, Helvetica, sans-serif;
+  font: 46px Arial, Helvetica, sans-serif;
 }
 
 nav a {
-  padding: 0 15px;
-  width: 32px;
+  padding: 0 8px;
+  width: 162px;
   text-decoration: none;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 46px;
   font-weight: normal;
   opacity: 0.9;
 }
@@ -127,8 +132,8 @@ nav a:hover {
 /*搜索框*/
 
 .text {
-  height: 22px;
-  font-size: 14px;
+  height: 62px;
+  font-size: 44px;
   border: 1px solid #ccc;
   padding: 3px 16px;
   border-bottom-left-radius: 20px;
@@ -144,8 +149,8 @@ nav a:hover {
 
 .button {
   width: 60px;
-  height: 30px;
-  font-size: 14px;
+  height: 64px;
+  font-size: 22px;
   margin-right: 35px;
   border: 1px solid #608bd2;
   background-color: #608bd2;
