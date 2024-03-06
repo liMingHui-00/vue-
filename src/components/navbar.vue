@@ -1,6 +1,11 @@
 <template>
   <div>
-    <video src="@/assets/bgvideo.mp4" muted="muted" autoplay="autoplay"></video>
+    <video
+      v-show="show"
+      src="@/assets/bgvideo.mp4"
+      muted="muted"
+      autoplay="autoplay"
+    ></video>
     <!-- 导航条 -->
     <div class="header">
       <div class="box">
@@ -39,8 +44,22 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router"
+import { ref, watch } from "vue"
+import { useRouter, useRoute } from "vue-router"
 const router = useRouter()
+const route = useRoute()
+// 判断是否显示视频背景
+console.log(route.path)
+let show = ref(true)
+watch(
+  () => route.path,
+  (newPath) => {
+    show.value = newPath === "/"
+  },
+  {
+    immediate: true,
+  }
+)
 // 搜索框的内容
 let searchMsg = ref("")
 // 判断是否登录
@@ -81,7 +100,7 @@ video {
   justify-content: space-between;
   height: 370px;
   /* background-color: #292c2f; */
-  color: #ffffff;
+  color: rgb(0, 0, 0);
 }
 
 .box {
@@ -113,7 +132,9 @@ nav a {
   padding: 0 8px;
   width: 162px;
   text-decoration: none;
-  color: #ffffff;
+  /* color: #ffffff; */
+  color: rgb(0, 0, 0);
+
   font-size: 46px;
   font-weight: normal;
   opacity: 0.9;

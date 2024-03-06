@@ -4,4 +4,11 @@
   <router-view></router-view>
 </template>
 
-<script setup></script>
+<script setup>
+import { onMounted } from "vue"
+import axios from "axios"
+onMounted(async () => {
+  const res = await axios.get("/api")
+  console.log(res.data)
+})
+</script>

@@ -24,4 +24,14 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target:
+          "https://apis.juhe.cn/simpleWeather/query?city=%E9%83%91%E5%B7%9E&key=26d9a20c025454feb09b4c5e88d03f1c",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 })
