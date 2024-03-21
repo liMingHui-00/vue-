@@ -14,13 +14,7 @@
         </nav>
       </div>
       <div class="box">
-        <input
-          class="text"
-          type="text"
-          placeholder="请输入关键词~~~"
-          v-model="searchMsg"
-          name="search"
-        />
+        <input class="text" type="text" placeholder="请输入关键词~~~" v-model="searchMsg" name="search" />
         <input class="button" type="button" value="搜索" @click="searchData" />
         <nav>
           <div v-if="loginSuccess">
@@ -33,12 +27,7 @@
           </div>
         </nav>
       </div>
-      <div class="weather">
-        <span class="city_weather"> city </span>
-        <span class="weather_main">weather_main day1</span>
-        <span class="weather_main">weather_main day2</span>
-        <span class="weather_main">weather_main day3</span>
-      </div>
+      <weather class="weather"></weather>
     </div>
   </div>
 </template>
@@ -47,19 +36,6 @@
 import { ref } from "vue"
 import { useRouter, useRoute } from "vue-router"
 const router = useRouter()
-// const route = useRoute()
-// // 判断是否显示视频背景
-// console.log(route.path)
-// let show = ref(true)
-// watch(
-//   () => route.path,
-//   (newPath) => {
-//     show.value = newPath === "/"
-//   },
-//   {
-//     immediate: true,
-//   }
-// )
 // 搜索框的内容
 let searchMsg = ref("")
 // 判断是否登录
@@ -81,13 +57,8 @@ const searchData = async () => {
     },
   })
 }
-// 天气
-let city_weather = ref(null)
-import axios from "axios"
 onMounted(async () => {
   judgingLogin()
-  city_weather = await axios.get("/api")
-  console.log(city_weather)
 })
 </script>
 
@@ -99,11 +70,11 @@ video {
   position: absolute;
   z-index: -9999;
 }
+
 .header {
   display: flex;
   align-items: center;
   height: 370px;
-  /* background-color: #292c2f; */
   color: rgb(0, 0, 0);
 }
 
@@ -121,36 +92,30 @@ h1 {
 
 img {
   width: 60px;
-  height: 60px;
+  height: 40px;
   cursor: pointer;
 }
 
 nav {
   display: flex;
   align-items: center;
-  /* margin: 0px 40px; */
   font: 46px Arial, Helvetica, sans-serif;
 }
 
 nav a {
   padding: 0 8px;
-  width: 150px;
+  margin-right: 5px;
+  width: 105px;
   text-decoration: none;
-  /* color: #ffffff; */
   color: rgb(0, 0, 0);
-
+  background-color: white;
+  border-radius: 10px;
   font-size: 46px;
   font-weight: normal;
   opacity: 0.9;
 }
 
 nav a:hover {
-  opacity: 1;
-}
-
-.active {
-  color: #608bd2;
-  pointer-events: none;
   opacity: 1;
 }
 
@@ -181,48 +146,26 @@ nav a:hover {
   background-color: #608bd2;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-}
-
-.contents {
-  display: flex;
-  justify-content: center;
-}
-
-.content {
-  display: flex;
-  width: 1400px;
-  height: 1400px;
-  /*background-color: #f0f2f3;*/
-}
-.my-avatar {
-  position: relative;
-}
-.my {
-  position: absolute;
-  top: 32px;
-  right: -70px;
   cursor: pointer;
-  font-size: 22px;
-  width: 60px;
-  height: 64px;
-  display: block;
 }
-.weather {
+
+.my-avatar {
   display: flex;
-  width: 100px;
-  position: absolute;
-  top: 100;
-  left: 1355px;
-  height: 200px;
-  border: 1px solid #000;
+  height: 60px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  background-color: white;
+  border-radius: 5px;
 }
-.city_weather {
-  border: 1px solid #000;
+
+.my {
+  cursor: pointer;
+  font-size: 22px;
 }
-.weather_main {
-  border: 1px solid #000;
+
+.weather {
+  position: absolute;
+  right: 20px;
 }
 </style>
