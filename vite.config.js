@@ -15,7 +15,14 @@ export default defineConfig({
     }),
     Components({
       //  可以通过配置来达到自动导入你想要导入的组件
-      dirs: ["./src/components", "./src/views", "./src/mock", "./src/store"],
+      dirs: [
+        "./src/components",
+        "./src/views",
+        "./src/mock",
+        "./src/store",
+        "./src/api",
+        "./src/views/components",
+      ],
       resolvers: [ElementPlusResolver()],
     }),
   ],

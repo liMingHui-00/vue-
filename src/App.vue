@@ -1,6 +1,5 @@
 <template>
-  <!-- <comments></comments> -->
-  <navbar></navbar>
+  <navbar v-if="$route.path !== '/login'"></navbar>
   <router-view></router-view>
 </template>
 

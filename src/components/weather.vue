@@ -1,8 +1,8 @@
 <template>
   <div class="weather-widget">
     <div class="header">
-      <span class="location">{{ data.city }}</span>
-      <span class="current-temperature">{{ data.realtime.temperature }}°C</span>
+      <span class="location">{{ data?.city }}</span>
+      <span class="current-temperature">{{ data?.realtime.temperature }}°C</span>
       <span class="settings-icon">⚙️</span>
     </div>
     <div class="date">{{ currentTime }}</div>
@@ -10,17 +10,17 @@
       <div class="day-weather">
         <span class="day">今天({{ weekdays.today }})</span>
         <span class="weather-icon">🌙</span>
-        <span class="temperature-range">{{ data.future[2].temperature }}</span>
+        <span class="temperature-range">{{ data?.future[2].temperature }}</span>
       </div>
       <div class="day-weather">
         <span class="day">明天({{ weekdays.tomorrow }})</span>
         <span class="weather-icon">⛅️</span>
-        <span class="temperature-range">{{ data.future[0].temperature }}</span>
+        <span class="temperature-range">{{ data?.future[0].temperature }}</span>
       </div>
       <div class="day-weather">
         <span class="day">后天({{ weekdays.dayAfterTomorrow }})</span>
         <span class="weather-icon">🌧️</span>
-        <span class="temperature-range">{{ data.future[1].temperature }}</span>
+        <span class="temperature-range">{{ data?.future[1].temperature }}</span>
       </div>
     </div>
   </div>
@@ -57,7 +57,6 @@ onMounted(async () => {
 
   let res = await axios.get("/api")
   data.value = res.data.result
-  // console.log(data.data?.result?.city)
 })
 </script>
 
