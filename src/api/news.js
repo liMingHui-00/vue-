@@ -15,10 +15,7 @@ export const useUpdateListServe = () => {
 export const useNewsDetails = (id) => {
   return request.get(`/news`, { params: { id } })
 }
-// 获取推荐页面的新闻
-export const useRecommendedNewsServer = () => {
-  return request.get("/news")
-}
+
 // 排行榜新闻点击跳转
 export const useNewsDetailServer = (newsId) => {
   return request.get(`/news/${newsId}`)
@@ -37,6 +34,20 @@ export const useFavoriteNewsService = () => {
 export const useLikeNewsButtonServer = (newsid) => {
   return request.post("/setlikenews", { newsid })
 }
+// 点击把作者设置为已关注
+export const useLikeAuthorServe = (newsid) => {
+  return request.post("/setLikeAuthor", { newsid })
+}
+// 取消关注作者
+export const useRemoveLikeAuthorServe = (newsid) => {
+  return request.post("/removeLikeAuthor", { newsid })
+}
+
+// 获取推荐的新闻
+export const useRecommendedNewsServe = () => {
+  return request.get("/recommend")
+}
+
 // 通过按钮把新闻设置为收藏
 export const useFavoriteNewsButtonServer = (newsid) => {
   return request.post("/setfavoritenews", { newsid })

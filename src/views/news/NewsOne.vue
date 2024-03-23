@@ -55,7 +55,8 @@
 <script setup>
 import { useRoute } from "vue-router"
 import comments from "@/views/components/comments.vue"
-import { useNewsDetailServer } from "@/api/news"
+import { useNewsDetailServer, useLikeAuthorServe, useRemoveLikeAuthorServe } from "@/api/news"
+
 const route = useRoute()
 const news = ref(null)
 const likeauthor = ref(null)
@@ -74,7 +75,7 @@ const fetchNewsDetail = async () => {
   msg.value = news.value.comment
 }
 // 点击关注
-const likeAuthor = (author) => {
+const likeAuthor = async (author) => {
   //从 localStorage 获取当前列表
   let followedAuthors = JSON.parse(
     localStorage.getItem("followedAuthors") || "[]"
@@ -83,6 +84,7 @@ const likeAuthor = (author) => {
     // 如果不在列表中，请将其添加到列表中，并标记为“已关注”
     followedAuthors.push(author)
     localStorage.setItem("followedAuthors", JSON.stringify(followedAuthors))
+    await useLikeAuthorServe(route.params.id)
     ElMessage({ message: "关注成功", type: "success" })
     // Update the button to reflect the new state
     likeauthor.value.innerHTML = "已关注"
@@ -90,6 +92,7 @@ const likeAuthor = (author) => {
     // If the author is already in the list, remove them and mark as "关注"
     followedAuthors = followedAuthors.filter((item) => item !== author)
     localStorage.setItem("followedAuthors", JSON.stringify(followedAuthors))
+    await useRemoveLikeAuthorServe(route.params.id)
     ElMessage({ message: "取消关注", type: "error" })
     // Update the button to reflect the new state
     likeauthor.value.innerHTML = "关注"
