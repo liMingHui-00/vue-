@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <!-- 新闻部分 -->
-
     <div v-if="newsData.length > 0" class="news-section">
       <!-- 替换为实际新闻项目 -->
       <router-link :to="'/news/' + news.url" class="news-item" v-for="news in newsData" :key="news.id">
@@ -47,7 +46,8 @@ onMounted(async () => {
   display: flex;
 
   // Define your container styles here
-  .news-section {
+  .news-section,
+  p {
     flex-grow: 1;
 
     // Define your news section styles here
@@ -92,15 +92,20 @@ onMounted(async () => {
 
     .rankings {
       // Define your rankings section styles here
-      position: fixed;
-      // flex: 0 0 25%;
-      // margin: 10px;
-      // padding: 10px;
-      // border: 1px solid #000;
+      // position: fixed;
+      flex: 0 0 25%;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #000;
       /* 右侧部分占据25%的宽度 */
-      top: 400px;
-      right: 10px;
+      // top: 400px;
+      // right: 10px;
     }
   }
+}
+
+p {
+  text-align: center;
+  font-size: large;
 }
 </style>

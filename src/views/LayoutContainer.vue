@@ -29,14 +29,9 @@
       <div class="right">
         <!-- 右边的热搜榜 -->
         <ranklist></ranklist>
-        <div
-          ref="el"
-          :style="{
-            display: buttonDisplay,
-          }"
-          class="goTop"
-          @click="goTopHandle"
-        >
+        <div ref="el" :style="{
+          display: buttonDisplay,
+        }" class="goTop" @click="goTopHandle">
           <i class="iconfont icon-jiantoushang"></i>
           回顶部
         </div>
@@ -129,6 +124,7 @@ onUnmounted(() => {
   /* 使用Flexbox布局 */
   justify-content: space-between;
   /* 在项目之间添加空间 */
+  padding: 5rem 20px;
 }
 
 .left {
@@ -205,6 +201,7 @@ onUnmounted(() => {
   height: 100px;
   /* 高度自动，保持图片比例 */
 }
+
 .goTop {
   position: fixed;
   left: 1426px;

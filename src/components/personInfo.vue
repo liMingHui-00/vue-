@@ -2,24 +2,17 @@
   <div class="container">
     <div class="container-top">
       <div class="profile">
-        <img
-          class="profile-image"
-          src="https://placehold.co/64"
-          alt="Profile image placeholder"
-        />
+        <img class="profile-image" src="https://placehold.co/64" alt="Profile image placeholder" />
         <div class="user-info">
           <h2 class="username">用户名</h2>
           <p class="user-description">用户简介或其他信息</p>
+          <i class="iconfont icon-xiaohu" @click="quit">退出登录</i>
         </div>
       </div>
     </div>
     <!-- <div class="navigation">收藏 点赞</div> -->
     <div class="navigation">
-      <div
-        class="nav-item"
-        @click="toggleFavorite"
-        :class="{ active: isFavorite }"
-      >
+      <div class="nav-item" @click="toggleFavorite" :class="{ active: isFavorite }">
         收藏
       </div>
       <div class="nav-item" @click="toggleLike" :class="{ active: isLike }">
@@ -71,6 +64,7 @@
 
 <script setup>
 import { useLikeNewsService } from "@/api/news"
+import { useRouter } from 'vue-router'
 import { useFavoriteNewsService } from "@/api/news"
 let isFavorite = ref(false)
 let isLike = ref(false)
@@ -101,6 +95,17 @@ const toggleLike = async () => {
   likeNews.value = data
   console.log(likeNews.value)
 }
+const router = useRouter()
+// 退出登录
+const quit = () => {
+  if (confirm('确认要退出吗？')) {
+    // 移除存储在localStorage中的token
+    localStorage.removeItem('token')
+    // 跳转到登录页面
+    router.push('/login')
+  }
+}
+
 </script>
 
 <style scoped>
@@ -113,40 +118,57 @@ const toggleLike = async () => {
   margin: 0 auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .container .container-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .container .container-top .profile {
   display: flex;
   align-items: center;
 }
+
 .container .container-top .profile .profile-image {
   border-radius: 9999px;
   border: 1px solid #d1d5db;
   margin-right: 1rem;
 }
+
 .container .container-top .profile .user-info .username {
   font-size: 1.25rem;
   font-weight: 600;
 }
+
 .container .container-top .profile .user-info .user-description {
   color: #6b7280;
 }
+
+.container .container-top .profile .user-info .iconfont {
+  font-size: larger;
+  position: absolute;
+  top: 435px;
+  left: 1065px;
+  cursor: pointer;
+}
+
 .container .navigation {
   display: flex;
   justify-content: space-around;
 }
+
 .container .navigation .nav-item {
   font-size: 16px;
   font-weight: 400;
   color: #909090;
   cursor: pointer;
 }
+
 .container .navigation .nav-item.active {
   color: #000;
 }
+
 .container .navigation .nav-item:hover {
   color: aqua;
 }
