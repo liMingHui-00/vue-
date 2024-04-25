@@ -36,8 +36,12 @@ const router = createRouter({
 })
 router.beforeEach(async (to) => {
   const token = localStorage.getItem("token")
-  // 如果没有token，或者去的页面不是登录页，则拦截页面到登录
-  if (!token && to.path !== "/login") {
+  // 游客可以查看首页内容
+  if (to.path === "/" || to.path === "/login") {
+    return true
+  }
+  // 如果没有token，，则拦截页面到登录
+  if (!token) {
     return "/login"
   }
   return true
