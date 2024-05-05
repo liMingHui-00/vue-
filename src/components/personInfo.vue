@@ -2,10 +2,11 @@
   <div class="container">
     <div class="container-top">
       <div class="profile">
-        <img class="profile-image" src="https://placehold.co/64" alt="Profile image placeholder" />
+        <img class="profile-image" src="http://localhost:5173/src/assets/avatar.png" alt="Profile image placeholder" />
         <div class="user-info">
-          <h2 class="username">用户名</h2>
-          <p class="user-description">用户简介或其他信息</p>
+          <h2 class="username">用户名:{{ olderInfo.username }}</h2>
+          <h2 class="email">邮箱:{{ olderInfo.email }}</h2>
+          <p class="user-description" @click="updateInfo">修改个人信息</p>
           <i class="iconfont icon-xiaohu" @click="quit">退出登录</i>
         </div>
       </div>
@@ -59,6 +60,24 @@
         </router-link>
       </div>
     </div>
+    <el-dialog v-model="dialogFormVisible" title="修改个人信息" width="500">
+      <el-form>
+        <el-form-item label="新用户名" :label-width="formLabelWidth">
+          <el-input v-model="username" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="新邮箱" :label-width="formLabelWidth">
+          <el-input v-model="email" autocomplete="off" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取消</el-button>
+          <el-button type="primary" @click="confrimUpdate">
+            确认
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -66,6 +85,8 @@
 import { useLikeNewsService } from "@/api/news"
 import { useRouter } from 'vue-router'
 import { useFavoriteNewsService } from "@/api/news"
+import { ref, onMounted } from "vue"
+import { useUserInfoService, useUpdateInfoService } from '@/api/user'
 let isFavorite = ref(false)
 let isLike = ref(false)
 // 点赞新闻列表
@@ -104,8 +125,47 @@ const quit = () => {
     // 跳转到登录页面
     router.push('/login')
   }
-}
 
+}
+const olderInfo = ref({ username: null, email: null, oldusername: null })
+
+const formLabelWidth = '140px'
+
+// 加载个人信息
+const getInfo = async () => {
+  const { data: { data } } = await useUserInfoService()
+  console.log(data)
+  // olderInfo.value.oldusername = JSON.parse(localStorage.getItem('user')).token.username
+  // olderInfo.value.username = JSON.parse(localStorage.getItem('user')).token.username
+  // olderInfo.value.email = JSON.parse(localStorage.getItem('user')).token.email
+  olderInfo.value.oldusername = data[0].username
+  olderInfo.value.username = data[0].username
+  olderInfo.value.email = data[0].email
+}
+onMounted(() => {
+
+  getInfo()
+})
+// 修改框
+const dialogFormVisible = ref(false)
+// 新的个人信息
+const username = ref(null)
+const email = ref(null)
+// 修改个人信息
+const updateInfo = () => {
+  dialogFormVisible.value = true
+}
+const confrimUpdate = async () => {
+  const data = {
+    username: username.value,
+    email: email.value,
+    oldusername: olderInfo.value.oldusername
+  }
+  await useUpdateInfoService(data)
+  // 关闭修改框
+  dialogFormVisible.value = false
+  getInfo()
+}
 </script>
 
 <style scoped>
@@ -134,15 +194,19 @@ const quit = () => {
   border-radius: 9999px;
   border: 1px solid #d1d5db;
   margin-right: 1rem;
+  width: 80px;
+  height: 80px;
 }
 
-.container .container-top .profile .user-info .username {
+.container .container-top .profile .user-info .username,
+.email {
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .container .container-top .profile .user-info .user-description {
   color: #6b7280;
+  cursor: pointer;
 }
 
 .container .container-top .profile .user-info .iconfont {

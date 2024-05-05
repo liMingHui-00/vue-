@@ -7,3 +7,11 @@ export const userRegisterService = ({ username, email, password }) => {
 export const userLoginService = ({ username, password }) => {
   return request.post("/login", { username, password })
 }
+// 获取用户信息
+export const useUserInfoService = () => {
+  return request.get("/getuserinfo")
+}
+// 修改用户信息
+export const useUpdateInfoService = (data) => {
+  return request.post("/updateuserinfo", data)
+}

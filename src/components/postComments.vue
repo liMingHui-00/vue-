@@ -1,26 +1,12 @@
 <template>
   <div class="comment-section">
     <div class="new-comment">
-      <textarea
-        class="new-comment-textarea"
-        placeholder="请输入评论内容"
-        v-model="newComment"
-        rows="4"
-      ></textarea>
+      <textarea class="new-comment-textarea" placeholder="请输入评论内容" v-model="newComment" rows="4"></textarea>
       <button class="submit-btn" @click="submitComment">提交评论</button>
     </div>
     <div class="comments">
-      <!-- <h2>h</h2> -->
-      <div
-        class="comment-box"
-        v-for="(comment, index) in comments"
-        :key="index"
-        :class="`color-${comment.color}`"
-      >
-        <img
-          class="avatar"
-          src="http://dummyimage.com/40 x 40/f28e79/7986f2&text=J"
-        />
+      <div class="comment-box" v-for="(comment, index) in comments" :key="index" :class="`color-${comment.color}`">
+        <img class="avatar" :src="userAvatar" />
         <!-- 评论内容 -->
         <p class="comment-main">{{ comment.text }}</p>
         <button class="like-btn" @click.once="likeComment(index)">
@@ -37,7 +23,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { useUserInfoService } from "@/api/user"
+import { ref, onMounted } from "vue"
+const userAvatar = ref(null)
 
 const newComment = ref("")
 const comments = ref([])
@@ -62,6 +50,10 @@ const likeComment = (index) => {
   const button = document.querySelector(".like-btn-num")
   button.style.color = "red"
 }
+onMounted(async () => {
+  const userInfo = await useUserInfoService()
+  userAvatar.value = userInfo.data.data[0].avatar
+})
 </script>
 
 <style scoped lang="scss">
@@ -101,11 +93,18 @@ const likeComment = (index) => {
       justify-content: space-between;
       align-items: center;
       position: relative;
+
       .comment-main {
         position: absolute;
         top: 0;
         left: 70px;
       }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+      }
+
       .comment-footer {
         display: flex;
         justify-content: space-between;
@@ -114,6 +113,7 @@ const likeComment = (index) => {
         top: 40px;
         left: 70px;
         color: rgb(107, 114, 128);
+
         ::before {
           content: "回复：";
           color: rgb(107, 114, 128);
@@ -122,6 +122,7 @@ const likeComment = (index) => {
     }
   }
 }
+
 .like-btn {
   position: absolute;
   top: 15px;

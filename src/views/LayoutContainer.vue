@@ -4,7 +4,7 @@
     <router-view></router-view>
     <div class="container" v-if="showContainer">
       <div class="left">
-        <!-- 左边的一个一个的新闻 -->
+        <!-- 左边新闻 -->
         <div v-for="news in Layout_news" :key="news.id" class="news-item">
           <router-link :to="'/news/' + news.url">
             <div class="news-text">
@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="news-image">
-              <!-- 图片，我需要在后端 -->
+              <!-- 图片 -->
               <img :src="news.image" alt="" />
             </div>
           </router-link>

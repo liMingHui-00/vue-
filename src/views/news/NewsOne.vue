@@ -55,7 +55,11 @@
 <script setup>
 import { useRoute } from "vue-router"
 import comments from "@/views/components/comments.vue"
-import { useNewsDetailServer, useLikeAuthorServe, useRemoveLikeAuthorServe } from "@/api/news"
+import {
+  useNewsDetailServer,
+  useLikeAuthorServe,
+  useRemoveLikeAuthorServe,
+} from "@/api/news"
 
 const route = useRoute()
 const news = ref(null)
@@ -100,8 +104,9 @@ const likeAuthor = async (author) => {
 }
 
 // 使用 onMounted 钩子
-onMounted(() => {
+onMounted(async () => {
   fetchNewsDetail()
+
 })
 </script>
 
