@@ -60,3 +60,7 @@ export const useSearchDataServer = (searchmsg) => {
 export const useHotNewsServer = () => {
   return request.get("/hot")
 }
+// 体育新闻
+export const useTiyuNewsService = () => {
+  return request.get("/tiyunews")
+}

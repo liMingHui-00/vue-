@@ -134,10 +134,6 @@ const formLabelWidth = '140px'
 // 加载个人信息
 const getInfo = async () => {
   const { data: { data } } = await useUserInfoService()
-  console.log(data)
-  // olderInfo.value.oldusername = JSON.parse(localStorage.getItem('user')).token.username
-  // olderInfo.value.username = JSON.parse(localStorage.getItem('user')).token.username
-  // olderInfo.value.email = JSON.parse(localStorage.getItem('user')).token.email
   olderInfo.value.oldusername = data[0].username
   olderInfo.value.username = data[0].username
   olderInfo.value.email = data[0].email

@@ -11,6 +11,7 @@
           <router-link to="/">首页</router-link>
           <router-link to="/recommend">推荐</router-link>
           <router-link to="/hot">热点</router-link>
+          <router-link to="/tiyu">体育</router-link>
         </nav>
       </div>
       <div class="box">

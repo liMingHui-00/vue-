@@ -32,6 +32,10 @@ const router = createRouter({
       path: "/recommend",
       component: () => import("@/views/Recommend.vue"),
     },
+    {
+      path: "/tiyu",
+      component: () => import("@/views/Tiyu.vue"),
+    },
   ],
 })
 router.beforeEach(async (to) => {
