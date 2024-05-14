@@ -7,25 +7,12 @@
       </div>
       <!-- 注册-->
       <form v-if="showRegister" @submit.prevent="register" class="form">
-        <input
-          v-model="registerForm.username"
-          class="form-input"
-          placeholder="Username"
-          @blur="RegisterUsernameVerification(registerForm)"
-        />
-        <input
-          v-model="registerForm.email"
-          class="form-input"
-          placeholder="Email"
-          @blur="RegisterEmailVerification(registerForm)"
-        />
-        <input
-          v-model="registerForm.password"
-          class="form-input"
-          placeholder="Password"
-          @blur="RegisterForPasswordVerification(registerForm)"
-          type="password"
-        />
+        <input v-model="registerForm.username" class="form-input" placeholder="Username"
+          @blur="RegisterUsernameVerification(registerForm)" />
+        <input v-model="registerForm.email" class="form-input" placeholder="Email"
+          @blur="RegisterEmailVerification(registerForm)" />
+        <input v-model="registerForm.password" class="form-input" placeholder="Password"
+          @blur="RegisterForPasswordVerification(registerForm)" type="password" />
         <button type="submit" class="form-button">注册</button>
         <p class="form-switch">
           已经有账号？
@@ -34,17 +21,8 @@
       </form>
       <!-- 登录 -->
       <form v-else @submit.prevent="login" class="form">
-        <input
-          v-model="loginForm.username"
-          class="form-input"
-          placeholder="Username"
-        />
-        <input
-          v-model="loginForm.password"
-          class="form-input"
-          placeholder="Password"
-          type="password"
-        />
+        <input v-model="loginForm.username" class="form-input" placeholder="Username" />
+        <input v-model="loginForm.password" class="form-input" placeholder="Password" type="password" />
         <button type="submit" class="form-button">登录</button>
         <p class="form-switch">
           还没有账号？
@@ -68,6 +46,7 @@ const userStore = useUserStore()
 let registerForm = ref({ username: "", email: "", password: "" })
 let loginForm = ref({ username: "", password: "" })
 async function register() {
+  console.log(registerForm.value)
   // 开启请求
   await userRegisterService(registerForm.value)
   ElMessage({ message: "注册成功", type: "success" })
